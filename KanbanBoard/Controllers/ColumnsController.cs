@@ -6,26 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KanbanBoard.Data;
+using KanbanBoard.Data.ColumnData;
+using KanbanBoard.Data.ColumnData.
 using KanbanBoard.Models;
 
 namespace KanbanBoard.Controllers
 {
     public class ColumnsController : Controller
     {
-        private readonly KanbanContext _context;
+        private readonly IColumnData _columnData;
 
-        public ColumnsController(KanbanContext context)
+        public ColumnsController(IColumnData columnData)
         {
-            _context = context;
+            _columnData = columnData;
+            
         }
 
-        // GET: Columns
-        public async Task<IActionResult> Index()
-        {
-            var kanbanContext = _context.Columns.Include(c => c.Board);
-            return View(await kanbanContext.ToListAsync());
-        }
-
+        
         // GET: Columns/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -34,9 +31,7 @@ namespace KanbanBoard.Controllers
                 return NotFound();
             }
 
-            var column = await _context.Columns
-                .Include(c => c.Board)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var column = _columnData.GetColumn(id.Value);
             if (column == null)
             {
                 return NotFound();
@@ -46,9 +41,10 @@ namespace KanbanBoard.Controllers
         }
 
         // GET: Columns/Create
-        public IActionResult Create()
+        public IActionResult Create([FromQuery(Name = "boardId")] int boardId)
         {
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Name");
+            TempData["boardId"] = boardId;
+            TempData.Keep();
             return View();
         }
 
@@ -57,15 +53,16 @@ namespace KanbanBoard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,BoardId")] Column column)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Column column)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(column);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                column.BoardId = (int)TempData["boardId"];
+                _columnData.AddColumn(column);
+
+                return RedirectToAction("Details", "Boards", new { id = column.BoardId });
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Name", column.BoardId);
+
             return View(column);
         }
 
@@ -77,12 +74,15 @@ namespace KanbanBoard.Controllers
                 return NotFound();
             }
 
-            var column = await _context.Columns.FindAsync(id);
+            var column = _columnData.GetColumn(id.Value);
             if (column == null)
             {
                 return NotFound();
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Name", column.BoardId);
+
+            TempData["boardId"] = column.BoardId;
+            TempData.Keep();
+            
             return View(column);
         }
 
@@ -91,7 +91,7 @@ namespace KanbanBoard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BoardId")] Column column)
+        public IActionResult Edit(int id, [Bind("Id,Name,BoardId")] Column column)
         {
             if (id != column.Id)
             {
@@ -100,39 +100,22 @@ namespace KanbanBoard.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(column);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ColumnExists(column.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                column.BoardId = (int)TempData["boardId"];
+                _columnData.UpdateColumn(column);
+                return RedirectToAction("Details", "Boards", new { id = column.BoardId });
             }
-            ViewData["BoardId"] = new SelectList(_context.Boards, "Id", "Name", column.BoardId);
             return View(column);
         }
 
         // GET: Columns/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var column = await _context.Columns
-                .Include(c => c.Board)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var column = _columnData.GetColumn(id.Value);
             if (column == null)
             {
                 return NotFound();
@@ -144,17 +127,16 @@ namespace KanbanBoard.Controllers
         // POST: Columns/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var column = await _context.Columns.FindAsync(id);
-            _context.Columns.Remove(column);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var column = _columnData.GetColumn(id);
+            if (column != null)
+            {
+                _columnData.DeleteColumn(id);
+                return RedirectToAction("Details", "Boards", new { id = column.BoardId });
+            }
 
-        private bool ColumnExists(int id)
-        {
-            return _context.Columns.Any(e => e.Id == id);
+            return NotFound();
         }
     }
 }
