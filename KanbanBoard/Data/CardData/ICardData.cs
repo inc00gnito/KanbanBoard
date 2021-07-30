@@ -6,7 +6,7 @@ using KanbanBoard.Models;
 
 namespace KanbanBoard.Data.CardData
 {
-    interface ICardData
+    public interface ICardData
     {
         IEnumerable<Card> GetCards(int columnId);
         Card GetCard(int cardId);

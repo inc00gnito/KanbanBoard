@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KanbanBoard.Data.BoardData;
+using KanbanBoard.Data.CardData;
 using KanbanBoard.Data.ColumnData;
 using KanbanBoard.Models;
 using Microsoft.AspNetCore.Components.Forms;
@@ -15,11 +16,13 @@ namespace KanbanBoard.Controllers
     {
         private readonly IBoardData _boardData;
         private readonly IColumnData _columnData;
+        private readonly ICardData _cardData;
 
-        public BoardsController(IBoardData boardData, IColumnData columnData)
+        public BoardsController(IBoardData boardData, IColumnData columnData, ICardData cardData)
         {
             _boardData = boardData;
             _columnData = columnData;
+            _cardData = cardData;
         }
         [HttpGet]
         public IActionResult Index()
@@ -43,6 +46,12 @@ namespace KanbanBoard.Controllers
             }
 
             board.Columns = _columnData.GetColumns(board.Id).ToList();
+
+            foreach (var boardColumn in board.Columns)
+            {
+                boardColumn.Cards = _cardData.GetCards(boardColumn.Id).ToList();
+            }
+
             return View(board);
 
         }

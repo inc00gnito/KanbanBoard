@@ -2,19 +2,16 @@
 @model KanbanBoard.Models.Column
 @{
 }
-<div class="card h-100" id="ColumnDisplay">
-    <div class="h-100">
-        <div class="card-header">
+<div class="card" >
+    <div class="card-header">
             <h5>@Model.Name</h5>
             <a  asp-controller="Columns" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
             <a  asp-controller="Columns" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
         </div>
-        <div id="card-drop" class="card-body column border-0" style="height: 100%" >
-            @*@foreach (var item in Model.Cards)
-            {
-
-                @await Html.PartialAsync("~/Views/Cards/_CardDetails.cshtml", item)
-            }*@
-        </div>
+    <div class="card-body" id="droppable">
+        @foreach (var item in Model.Cards)
+        {
+            @await Html.PartialAsync("~/Views/Cards/_CardDetails.cshtml", item)
+        }
     </div>
 </div>

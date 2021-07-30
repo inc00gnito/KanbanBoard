@@ -1,0 +1,10 @@
+﻿@model Card
+<div class="card" id="draggable">
+    <div class="card-header">
+        <a class="btn btn-primary" asp-controller="Cards" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
+        <a class="btn btn-danger" asp-controller="Cards" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
+    </div>
+    <div class="card-body">
+        @Model.Description
+    </div>
+</div>
