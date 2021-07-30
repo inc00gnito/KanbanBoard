@@ -4,18 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using KanbanBoard.Data.BoardData;
+using KanbanBoard.Data.ColumnData;
 using KanbanBoard.Models;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace KanbanBoard.Controllers
 {
     public class BoardsController : Controller
     {
         private readonly IBoardData _boardData;
+        private readonly IColumnData _columnData;
 
-        public BoardsController(IBoardData boardData)
+        public BoardsController(IBoardData boardData, IColumnData columnData)
         {
             _boardData = boardData;
+            _columnData = columnData;
         }
         [HttpGet]
         public IActionResult Index()
@@ -38,6 +42,7 @@ namespace KanbanBoard.Controllers
                 return NotFound();
             }
 
+            board.Columns = _columnData.GetColumns(board.Id).ToList();
             return View(board);
 
         }

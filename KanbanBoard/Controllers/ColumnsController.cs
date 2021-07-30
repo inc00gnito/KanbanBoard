@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KanbanBoard.Data;
 using KanbanBoard.Data.ColumnData;
-using KanbanBoard.Data.ColumnData.
+
 using KanbanBoard.Models;
 
 namespace KanbanBoard.Controllers
@@ -22,9 +22,9 @@ namespace KanbanBoard.Controllers
             
         }
 
-        
+
         // GET: Columns/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -53,13 +53,12 @@ namespace KanbanBoard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Column column)
+        public IActionResult Create([Bind("Id,Name")] Column column)
         {
             if (ModelState.IsValid)
             {
                 column.BoardId = (int)TempData["boardId"];
                 _columnData.AddColumn(column);
-
                 return RedirectToAction("Details", "Boards", new { id = column.BoardId });
             }
 
@@ -67,7 +66,7 @@ namespace KanbanBoard.Controllers
         }
 
         // GET: Columns/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
