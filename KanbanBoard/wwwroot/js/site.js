@@ -28,28 +28,33 @@ $(function() {
         });
 });
 
-// sortable columns
+ //sortable columns
 $(function () {
+    //$(".columnsBody").sortable({
+    //    forcePlaceholderSize: true,
+    //    placeholder: "ui-state-highlight",
+    //    handle: "div.card-header",
+    //    cancel: "div.card-body"
+    //})
+    //$(".columnsBody").sortable('refresh');
     $(".columnsBody").sortable({
-        forcePlaceholderSize:true,
-        placeholder: "ui-state-highlight"
-    });
-    $(".columnsBody").sortable({
+        forcePlaceholderSize: true,
+        placeholder: "ui-state-highlight",
         handle: "div.card-header",
         cancel: "div.card-body"
     });
     $(".columnsBody").disableSelection();
-   /* $(".columnsBody").sortable('refresh');*/
+    $(".columnsBody").sortable('refresh');
+});
+$(function () {
+    $(".columnDroppable").sortable({
+        forcePlaceholderSize: true,
+        connectWith: ".columnDroppable",
+        placeholder: "ui-state-highlight"
+    });
+    //getter 
+    var connectWith = $(".columnDroppable").sortable("option", "connectWith");
+    // Setter
+    $(".columnDroppable").sortable("option", "connectWith", ".columnDroppable");
 
 });
-//$(function() {
-//    $("#draggable").draggable({
-//        zIndex:100
-//    });
-//    $("#droppable").droppable({
-//        accept: ("#draggable"),
-//        drop: function(event, ui) {
-//            $(this)
-//        }
-//    })
-//})

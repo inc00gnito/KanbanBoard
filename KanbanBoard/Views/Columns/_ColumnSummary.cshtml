@@ -8,7 +8,7 @@
             <a  asp-controller="Columns" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
             <a  asp-controller="Columns" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
         </div>
-    <div class="card-body" id="droppable">
+    <div class="card-body columnDroppable">
         @foreach (var item in Model.Cards)
         {
             @await Html.PartialAsync("~/Views/Cards/_CardDetails.cshtml", item)
