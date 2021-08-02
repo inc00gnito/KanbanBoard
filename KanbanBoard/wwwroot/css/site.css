@@ -74,6 +74,14 @@ body {
     background-color: rgba(255, 122, 131,0.5);
     border-radius: 10px;
 }
+.card-text {
+    justify-content: space-evenly;
+    align-items: flex-start;
+    display: flex;
+}
+.card-title {
+    text-align: center;
+}
 
 .columnsBody {
     display: flex;
