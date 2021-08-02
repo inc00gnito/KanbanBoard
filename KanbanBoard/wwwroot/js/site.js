@@ -23,22 +23,22 @@ $(function () {
                 placeHolderElement.find('.modal').modal('hide');
             });
         });
-
+});
+$(function() {
     $("#addCardPlaceHolder").on('hidden.bs.modal',
-        function () {
+        function() {
             location.reload();
         });
-
 });
 
-$(function() {
-    $("#draggable").draggable({
-        zIndex:100
-    });
-    $("#droppable").droppable({
-        accept: ("#draggable"),
-        drop: function(event, ui) {
-            $(this)
-        }
-    })
-})
+//$(function() {
+//    $("#draggable").draggable({
+//        zIndex:100
+//    });
+//    $("#droppable").droppable({
+//        accept: ("#draggable"),
+//        drop: function(event, ui) {
+//            $(this)
+//        }
+//    })
+//})
