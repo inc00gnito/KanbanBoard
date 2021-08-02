@@ -80,4 +80,8 @@ body {
 .column {
     flex: 1;
     height: 500px;
+    margin: 10px;
+}
+h5 {
+    display: inline-block;
 }
