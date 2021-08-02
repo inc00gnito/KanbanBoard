@@ -1,7 +1,4 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿// popup window for adding cards
 $(function () {
 
     var placeHolderElement = $("#modalCard");
@@ -31,6 +28,19 @@ $(function() {
         });
 });
 
+// sortable columns
+$(function () {
+    $(".columnsBody").sortable({
+        placeholder: "ui-state-highlight"
+    });
+    $(".columnsBody").sortable({
+        handle: "div.card-header",
+        cancel: "div.card-body"
+    });
+    $(".columnsBody").disableSelection();
+   /* $(".columnsBody").sortable('refresh');*/
+
+});
 //$(function() {
 //    $("#draggable").draggable({
 //        zIndex:100
