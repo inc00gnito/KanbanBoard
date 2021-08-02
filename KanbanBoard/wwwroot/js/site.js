@@ -31,6 +31,7 @@ $(function() {
 // sortable columns
 $(function () {
     $(".columnsBody").sortable({
+        forcePlaceholderSize:true,
         placeholder: "ui-state-highlight"
     });
     $(".columnsBody").sortable({
