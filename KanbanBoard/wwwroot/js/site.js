@@ -30,20 +30,12 @@ $(function() {
 
  //sortable columns
 $(function () {
-    //$(".columnsBody").sortable({
-    //    forcePlaceholderSize: true,
-    //    placeholder: "ui-state-highlight",
-    //    handle: "div.card-header",
-    //    cancel: "div.card-body"
-    //})
-    //$(".columnsBody").sortable('refresh');
     $(".columnsBody").sortable({
         forcePlaceholderSize: true,
         placeholder: "ui-state-highlight",
         handle: "div.card-header",
         cancel: "div.card-body"
     });
-    $(".columnsBody").disableSelection();
     $(".columnsBody").sortable('refresh');
 });
 $(function () {

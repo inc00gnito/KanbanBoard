@@ -71,7 +71,7 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 .ui-state-highlight {
-    background-color: rgba(255, 122, 131,0.5);
+    background-color: rgba(218, 0, 55,0.5);
     border-radius: 10px;
 }
 .card-text {
@@ -88,9 +88,19 @@ body {
 }
 .column {
     flex: 1;
+    width: auto;
     height: 500px;
     margin: 10px;
+    
+}
+.columnDroppable {
+    overflow-x: hidden !important;
+    overflow-y: auto;
 }
 h5 {
     display: inline-block;
+}
+#draggable {
+    margin-bottom: 10px;
+    z-index: 10;
 }
