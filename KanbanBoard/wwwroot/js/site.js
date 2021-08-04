@@ -22,7 +22,7 @@ $(function () {
         });
 });
 $(function() {
-    $("#addCardPlaceHolder").on('hidden.bs.modal',
+    $("#modalCard").on('hidden.bs.modal',
         function() {
             location.reload();
         });
@@ -42,7 +42,7 @@ $(function () {
     $(".columnDroppable").sortable({
         forcePlaceholderSize: true,
         connectWith: ".columnDroppable",
-        placeholder: "ui-state-highlight"
+        placeholder: "ui-state-highlight",
     });
     //getter 
     var connectWith = $(".columnDroppable").sortable("option", "connectWith");

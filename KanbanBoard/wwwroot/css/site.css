@@ -100,7 +100,7 @@ body {
 h5 {
     display: inline-block;
 }
-#draggable {
+.draggable {
     margin-bottom: 10px;
     z-index: 10;
 }
