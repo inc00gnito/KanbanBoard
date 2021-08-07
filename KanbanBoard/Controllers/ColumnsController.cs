@@ -22,8 +22,6 @@ namespace KanbanBoard.Controllers
             
         }
 
-
-        // GET: Columns/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -40,7 +38,6 @@ namespace KanbanBoard.Controllers
             return View(column);
         }
 
-        // GET: Columns/Create
         public IActionResult Create([FromQuery(Name = "boardId")] int boardId)
         {
             TempData["boardId"] = boardId;
@@ -48,9 +45,6 @@ namespace KanbanBoard.Controllers
             return View();
         }
 
-        // POST: Columns/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,Name")] Column column)
@@ -65,7 +59,7 @@ namespace KanbanBoard.Controllers
             return View(column);
         }
 
-        // GET: Columns/Edit/5
+     
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,9 +79,6 @@ namespace KanbanBoard.Controllers
             return View(column);
         }
 
-        // POST: Columns/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Name,BoardId")] Column column)
@@ -105,8 +96,6 @@ namespace KanbanBoard.Controllers
             }
             return View(column);
         }
-
-        // GET: Columns/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,7 +112,6 @@ namespace KanbanBoard.Controllers
             return View(column);
         }
 
-        // POST: Columns/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
@@ -137,5 +125,8 @@ namespace KanbanBoard.Controllers
 
             return NotFound();
         }
+
     }
+
 }
+

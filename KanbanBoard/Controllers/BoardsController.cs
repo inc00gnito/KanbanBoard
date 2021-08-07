@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KanbanBoard.Data;
 using KanbanBoard.Data.BoardData;
 using KanbanBoard.Data.CardData;
 using KanbanBoard.Data.ColumnData;
@@ -17,12 +18,14 @@ namespace KanbanBoard.Controllers
         private readonly IBoardData _boardData;
         private readonly IColumnData _columnData;
         private readonly ICardData _cardData;
+        private readonly KanbanContext _dbContext;
 
-        public BoardsController(IBoardData boardData, IColumnData columnData, ICardData cardData)
+        public BoardsController(IBoardData boardData, IColumnData columnData, ICardData cardData, KanbanContext dbContext)
         {
             _boardData = boardData;
             _columnData = columnData;
             _cardData = cardData;
+            _dbContext = dbContext;
         }
         [HttpGet]
         public IActionResult Index()
@@ -45,9 +48,15 @@ namespace KanbanBoard.Controllers
                 return NotFound();
             }
 
-            board.Columns = _columnData.GetColumns(board.Id).ToList();
+            //board.Columns = _columnData.GetColumns(board.Id).ToList();
+            var columnsList = from column in _dbContext.Columns
+                where column.BoardId == board.Id
+                orderby column.Position
+                select column;
+            board.Columns = columnsList.ToList();
 
-            foreach (var boardColumn in board.Columns)
+
+             foreach (var boardColumn in board.Columns)
             {
                 boardColumn.Cards = _cardData.GetCards(boardColumn.Id).ToList();
             }
@@ -125,5 +134,7 @@ namespace KanbanBoard.Controllers
             //await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
     }
+
 }

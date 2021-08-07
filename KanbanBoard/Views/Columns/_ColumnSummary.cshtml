@@ -2,13 +2,13 @@
 @model KanbanBoard.Models.Column
 @{
 }
-<div class="card column" >
+<div class="card column" data-id="@Model.Id" data-position="@Model.Position">
     <div class="card-header">
-            <h5>@Model.Name</h5>
-            <a  class="text-secondary"  asp-controller="Columns" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
-            <a  class="text-danger" asp-controller="Columns" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
-        </div>
-    <div class="card-body columnDroppable" id="@Model.Id">
+        <h5>@Model.Name</h5>
+        <a class="text-secondary" asp-controller="Columns" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
+        <a class="text-danger" asp-controller="Columns" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
+    </div>
+    <div class="card-body columnDroppable">
         @foreach (var item in Model.Cards)
         {
             @await Html.PartialAsync("~/Views/Cards/_CardDetails.cshtml", item)

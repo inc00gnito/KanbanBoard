@@ -13,6 +13,7 @@ namespace KanbanBoard.Models
         public string Name { get; set; }
         public Board Board { get; set; }
         public int BoardId { get; set; }
+        public int Position { get; set; }
         public IList<Card> Cards { get; set; } = new List<Card>();
     }
 }
