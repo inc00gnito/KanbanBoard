@@ -23,9 +23,9 @@ namespace KanbanBoard.Controllers.api
         {
             foreach (var columnPosition in columnPositions)
             {
-                var col = _columnData.GetColumn(Convert.ToInt32(columnPosition.columnId));
+                var col = _columnData.GetColumn(Convert.ToInt32(columnPosition.ColumnId));
                 
-                col.Position = Convert.ToInt32(columnPosition.positionId);
+                col.Position = Convert.ToInt32(columnPosition.PositionId);
                 _columnData.UpdateColumn(col);
             }
             
@@ -35,8 +35,8 @@ namespace KanbanBoard.Controllers.api
 
     public class Position
     {
-        public string columnId { get; set; }
-        public string positionId { get; set; }
+        public string ColumnId { get; set; }
+        public string PositionId { get; set; }
     }
 
 }
