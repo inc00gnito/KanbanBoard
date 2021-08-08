@@ -69,15 +69,14 @@ $(function() {
     $(".draggable").draggable({
         revert: "invalid",
         stack: ".sortable",
-        handle: "not()",
+        cancel:".btn-sm",
         zIndex:20,
         distance: 0
 
-});
+    });
     $(".columnDroppable").droppable({
         accept: ".draggable",
         hoverClass: "ui-state-highlight",
-        
         drop: function(event, ui) {
             var dropped = ui.draggable;
             var droppedOn = $(this);
@@ -87,17 +86,13 @@ $(function() {
                 cardId: dropped[0].id,
                 onColumnId: droppedOn[0].parentNode.getAttribute('data-id')
             }
-            console.log(position);
-
+            
             $.ajax({
                 type: "POST",
                 url: "/api/CardPosition/cardupdate",
                 data: JSON.stringify(position),
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
-                error: function(response) {
-                    console.log(response.responseText);
-                }
             });
         }
     });
