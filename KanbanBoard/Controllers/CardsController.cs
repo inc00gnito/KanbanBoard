@@ -24,7 +24,7 @@ namespace KanbanBoard.Controllers
         }
         
         // GET: Cards/Create
-        public IActionResult Create(int columnId, int backupId)
+        public IActionResult Create(int columnId)
         {
             
             TempData["columnId"] = columnId;

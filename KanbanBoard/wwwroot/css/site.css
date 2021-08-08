@@ -94,13 +94,12 @@ body {
     
 }
 .columnDroppable {
-    overflow-x: hidden !important;
-    overflow-y: auto;
+/*    overflow-x: hidden !important;
+    overflow-y: auto;*/
 }
 h5 {
     display: inline-block;
 }
 .draggable {
     margin-bottom: 10px;
-    z-index: 10;
 }

@@ -65,16 +65,57 @@ $(function () {
     });
     $(".columnsBody").sortable('refresh');
 });
-// sortable cards within columns
-$(function () {
-    $(".columnDroppable").sortable({
-        forcePlaceholderSize: true,
-        connectWith: ".columnDroppable",
-        placeholder: "ui-state-highlight",
+ //sortable cards within columns
+//$(function () {
+//    $(".columnDroppable").sortable({
+//        forcePlaceholderSize: true,
+//        connectWith: ".columnDroppable",
+//        placeholder: "ui-state-highlight",
+//        start: function(event, ui) {
+//            var draggable = 
+//            console.log(draggable);
+//        }
        
+//    });
+//    //getter 
+//    var connectWith = $(".columnDroppable").sortable("option", "connectWith");
+//    // Setter
+//    $(".columnDroppable").sortable("option", "connectWith", ".columnDroppable");
+//});
+
+
+$(function() {
+    $(".draggable").draggable({
+        revert: "invalid",
+        stack: ".sortable",
+        zIndex:20,
+        distance: 0
+
+});
+    $(".columnDroppable").droppable({
+        accept: ".draggable",
+        drop: function(event, ui) {
+            var dropped = ui.draggable;
+            var droppedOn = $(this);
+            $(dropped).detach().css({ top: 0, left: 0 }).appendTo(droppedOn);
+
+            var position = {
+                cardId: dropped[0].id,
+                onColumnId: droppedOn[0].parentNode.getAttribute('data-id')
+            }
+            console.log(position);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/CardPosition/cardupdate",
+                data: JSON.stringify(position),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        }
     });
-    //getter 
-    var connectWith = $(".columnDroppable").sortable("option", "connectWith");
-    // Setter
-    $(".columnDroppable").sortable("option", "connectWith", ".columnDroppable");
+
 });
