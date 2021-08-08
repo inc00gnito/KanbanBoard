@@ -94,6 +94,8 @@ $(function() {
 });
     $(".columnDroppable").droppable({
         accept: ".draggable",
+        hoverClass: "ui-state-highlight",
+        
         drop: function(event, ui) {
             var dropped = ui.draggable;
             var droppedOn = $(this);
