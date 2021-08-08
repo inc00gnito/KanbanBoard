@@ -2,7 +2,7 @@
 @model KanbanBoard.Models.Column
 @{
 }
-<div class="card column" data-id="@Model.Id" data-position="@Model.Position">
+<div class="card border-primary mb-3 column" data-id="@Model.Id" data-position="@Model.Position">
     <div class="card-header">
         <h5>@Model.Name</h5>
         <a class="text-secondary" asp-controller="Columns" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
