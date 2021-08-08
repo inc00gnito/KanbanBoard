@@ -1,9 +1,12 @@
 ﻿@model Card
-<div class="card draggable" id="@Model.Id">
-    <div class="card-body">
-        @Model.Description
-        <hr/>
-        <a class="btn-sm dont-drag text-secondary"  asp-controller="Cards" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
+<div class="card text-white bg-secondary mb-3 draggable" id="@Model.Id">
+    <div class="card-header">
+        <a class="btn-sm dont-drag text-secondary" asp-controller="Cards" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-edit"></i></a> |
         <a class="btn-sm dont-drag text-danger" asp-controller="Cards" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-minus"></i></a>
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            @Model.Description
+        </div>
     </div>
 </div>
