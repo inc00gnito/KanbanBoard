@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a class="btn btn-success" asp-action="Details" asp-controller="Boards" asp-route-id="@Model.BoardId">Go back to board</a>
+        <input type="submit" value="Delete" class="btn btn-outline-danger" /> |
+        <a class="btn btn-outline-info" asp-action="Details" asp-controller="Boards" asp-route-id="@Model.BoardId">Go back to board</a>
     </form>
 </div>

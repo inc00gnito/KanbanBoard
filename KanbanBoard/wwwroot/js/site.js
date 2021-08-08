@@ -65,29 +65,11 @@ $(function () {
     });
     $(".columnsBody").sortable('refresh');
 });
- //sortable cards within columns
-//$(function () {
-//    $(".columnDroppable").sortable({
-//        forcePlaceholderSize: true,
-//        connectWith: ".columnDroppable",
-//        placeholder: "ui-state-highlight",
-//        start: function(event, ui) {
-//            var draggable = 
-//            console.log(draggable);
-//        }
-       
-//    });
-//    //getter 
-//    var connectWith = $(".columnDroppable").sortable("option", "connectWith");
-//    // Setter
-//    $(".columnDroppable").sortable("option", "connectWith", ".columnDroppable");
-//});
-
-
 $(function() {
     $(".draggable").draggable({
         revert: "invalid",
         stack: ".sortable",
+        handle: "not()",
         zIndex:20,
         distance: 0
 

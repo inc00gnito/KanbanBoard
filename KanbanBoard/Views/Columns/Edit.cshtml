@@ -4,9 +4,10 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Column</h4>
+<h1>Edit <span class="text-danger">@Model.Name</span></h1>
+<div>
+    <a class="btn btn-outline-info" asp-action="Details" asp-controller="Boards" asp-route-id="@Model.BoardId">Back to List</a>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -25,9 +26,7 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Details" asp-controller="Boards" asp-route-id="@Model.BoardId">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
