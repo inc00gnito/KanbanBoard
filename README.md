@@ -1,5 +1,5 @@
 # KanbanBoard
-Kanban Board application created with ASP.NET CORE MVC.
+Kanban Board application created with ASP.NET CORE MVC and Bootswatch slate theme.
 ## Scope
 This project was created for the sole purpose of recreating a Trello app using ASP.NET
 ## Details 
@@ -15,7 +15,4 @@ This application was made using:
 * Entity Framework 
 * jQuery
 * Javascript
-* CSS
-
-## Future of application
-Currently working on app design.
+* CSS, Bootstrap
