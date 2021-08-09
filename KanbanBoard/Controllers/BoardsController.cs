@@ -48,7 +48,6 @@ namespace KanbanBoard.Controllers
                 return NotFound();
             }
 
-            //board.Columns = _columnData.GetColumns(board.Id).ToList();
             var columnsList = from column in _dbContext.Columns
                 where column.BoardId == board.Id
                 orderby column.Position
