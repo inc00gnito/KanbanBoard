@@ -1,7 +1,7 @@
 # KanbanBoard
 Kanban Board application created with ASP.NET CORE MVC and Bootswatch slate theme.
 
-Demo: https://kanbanapp.azurewebsites.net/ (If it doesn't work then i run out of azure credits)
+Demo: https://kanbanboardsapp.azurewebsites.net/ (If it doesn't work then i run out of azure credits)
 ## Scope
 This project was created for the sole purpose of recreating a Trello app using ASP.NET
 ## Details 
